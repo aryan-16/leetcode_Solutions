@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-int nCr(int n, int r) {
+/*int nCr(int n, int r) {
     long long res = 1;
 
     // calculating nCr:
@@ -10,19 +10,28 @@ int nCr(int n, int r) {
         res = res / (i + 1);
     }
     return (int)(res);
-}
+}*/
+
+    vector<int> generateRow(int row){
+        long long ans = 1;
+        vector<int> ansRow;
+        ansRow.push_back(1);
+        for(int col=1; col<row;col++){
+            ans = ans*(row-col);
+            ans = ans/col;
+            ansRow.push_back(ans);
+        }
+        return ansRow;
+    }
     vector<vector<int>> generate(int numRows) {
         vector<vector<int>> ans;
         int n = numRows;
-
-    //Store the entire pascal's triangle:
-    for (int row = 1; row <= n; row++) {
-        vector<int> tempLst; // temporary list
-        for (int col = 1; col <= row; col++) {
-            tempLst.push_back(nCr(row - 1, col - 1));
+        for(int i=1;i<=n;i++){
+                vector<int> temp = generateRow(i);
+                ans.push_back(temp);
         }
-        ans.push_back(tempLst);
-      }
-      return ans;
+        return ans;
+        
+           
     }
 };
